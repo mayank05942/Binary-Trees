@@ -32,6 +32,13 @@ class Solution:
  Method 2- Iterative (Using stack)
  ---------------------------------
  
+ _____________________________________________________________________________________________________________________
+ 
+ Explanation: https://www.youtube.com/watch?v=elQcrJrfObg
+ 
+ If left and right child both exist then first append right child and then append the left child (due to FIFO)
+ ___________________________________________________________________________________________________________________
+ 
  # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
