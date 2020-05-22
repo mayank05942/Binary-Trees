@@ -1,0 +1,61 @@
+Prob: https://leetcode.com/problems/binary-tree-preorder-traversal/
+_______________________________________________________________________________________________________________
+
+Explanation: Pre-order traversal is to visit the root first. Then traverse the left subtree. Finally, traverse the right subtree.
+
+_______________________________________________________________________________________________________________
+
+Method1: Recursive
+--------------------
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def preorderTraversal(self, root: TreeNode) -> List[int]:  # root is TreeNode defined above
+        return self.preorder(root,[])
+        
+    
+    def preorder(self,start,lis):   # start is a node having 3 attributes and lis is where we will append our answer
+        if start:
+            lis.append(start.val)
+            lis = self.preorder(start.left,lis)
+            lis = self.preorder(start.right,lis)
+        return lis
+        
+ _____________________________________________________________________________________________________________________________________
+ 
+ Method 2- Iterative (Using stack)
+ ---------------------------------
+ 
+ # Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def preorderTraversal(self, root: TreeNode) -> List[int]:
+        if root is None:
+            return []
+        else:
+            stack = []
+            res = []
+            stack.append(root)   # start with the root node
+            while stack:
+            
+                node = stack.pop()   # remove top most element of the stack
+                res.append(node.val)  # append it's value
+                
+                if node.right:         # it a right value exist to that node append it
+                    stack.append(node.right)
+                    
+                if node.left:
+                    stack.append(node.left)
+            return res
+______________________________________________________________________________________________________________________________________
