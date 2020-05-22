@@ -1,0 +1,47 @@
+Prob: https://leetcode.com/problems/binary-tree-inorder-traversal/
+_________________________________________________________________________________________________________________________
+
+Explanation: In-order traversal is to traverse the left subtree first. Then visit the root. Finally, traverse the right subtree.
+
+________________________________________________________________________________________________________________________
+
+Method 1: Recursive
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        return self.inorder(root,[])
+        
+    def inorder(self,start,lis):
+        if start:
+            lis = self.inorder(start.left,lis)
+            lis.append(start.val)
+            lis = self.inorder(start.right,lis)
+        return lis
+_________________________________________________________________________________________________________________________
+
+Method 2: Iterative method ( stack)
+
+# iteratively
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        results, stack = [], []
+        cur = root
+        while cur or stack:          # KEY: current node not none "or" stack is not empty
+            while cur is not None:
+                stack.append(cur)
+                cur = cur.left       # check to the leftmost leave
+            node = stack.pop()
+            results.append(node.val) 
+            cur = node.right       # check if any right leave
+
+        return results
+
+
+_________________________________________________________________________________________________________________________
