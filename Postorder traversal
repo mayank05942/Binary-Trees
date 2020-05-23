@@ -1,0 +1,30 @@
+Prob:https://leetcode.com/problems/binary-tree-postorder-traversal/
+____________________________________________________________________________________________________________________________________
+
+Explanation: visit left subtree then right subtree and at last visit the root node.
+
+_______________________________________________________________________________________________________________________________________
+
+Recursive method:
+------------------
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def postorderTraversal(self, root: TreeNode) -> List[int]:
+        return self.postorder(root,[])
+    
+    def postorder(self,start,lis):
+        if start:
+            lis = self.postorder(start.left,lis)
+            lis = self.postorder(start.right,lis)
+            lis.append(start.val)
+        return lis
+  ___________________________________________________________________________________________________________________________________
+  
+  Iterative Method:
+  ------------------
