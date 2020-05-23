@@ -1,0 +1,43 @@
+Prob: https://leetcode.com/problems/binary-tree-level-order-traversal/
+__________________________________________________________________________________________________________________________
+
+Explanation: Use Queue to get nodes as per the level ( It is a BFS solution)
+
+____________________________________________________________________________________________________________________________
+
+Code:
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        if root:
+            queue = []
+            res = []
+            queue.append(root)
+
+            while queue:
+                ans = []
+                for _ in range(len(queue)):
+                    current = queue.pop(0)
+                    ans.append(current.val)
+
+                    if current.left is not None:
+                        queue.append(current.left)
+
+                    if current.right is not None:
+                        queue.append(current.right)
+                res.append(ans)
+
+            return res
+        else:
+            return []
+            
+        
+            
+        
