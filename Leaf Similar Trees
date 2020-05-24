@@ -1,0 +1,41 @@
+Prob:
+_______________________________________________________________________________________________________________________
+
+Explanation:
+
+Leaf node is one whose left and right childs are None hence do the normal traversal and append only when the cond satisifies.
+
+_________________________________________________________________________________________________________________________________
+
+Code:
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def leafSimilar(self, root1: TreeNode, root2: TreeNode) -> bool:
+        lis1,lis2 = [],[]
+        self.traversal(root1,lis1)
+        self.traversal(root2,lis2)
+        
+        return lis1 == lis2
+        
+        
+    
+    def traversal(self,start,ans):
+        if start:
+            if not start.left and not start.right:
+                ans.append(start.val)
+                
+            if start.left:
+                self.traversal(start.left,ans)
+            if start.right:
+                self.traversal(start.right,ans)
+        
+            
+        
+        
