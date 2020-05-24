@@ -1,10 +1,16 @@
-Prob:
+Prob: https://leetcode.com/problems/leaf-similar-trees/
 _______________________________________________________________________________________________________________________
 
 Explanation:
 
+This prob test wheather we know how to print the leaves of a tree or not.
+
 Leaf node is one whose left and right childs are None hence do the normal traversal and append only when the cond satisifies.
 
+Complexity:
+
+        time: O(N) for touching each node
+        space: O(H) for height of the tree being on the stack
 _________________________________________________________________________________________________________________________________
 
 Code:
