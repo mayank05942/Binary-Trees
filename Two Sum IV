@@ -1,0 +1,46 @@
+Prob: https://leetcode.com/problems/two-sum-iv-input-is-a-bst/
+__________________________________________________________________________________________________________________________________
+
+Explanation:
+We just need to return if there exist two elements in a BST such that their sum is equal to the target.
+
+First we need to collect all elements -- > Do inorder traversal by this we will get all items in increasing order and we can
+use two pointers to solve the question.
+
+Time Complexity: O(n), Space Complexity: O(n).
+____________________________________________________________________________________________________________________________________
+
+Code:
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def findTarget(self, root: TreeNode, k: int) -> bool:
+        if root.left is None and root.right is None: return False
+        
+        arr = self.traverse(root,[])
+        
+        i = 0
+        j = len(arr)-1
+        print(arr)
+        while i < j:
+            if arr[i] + arr[j] == k:
+                return True
+            elif arr[i] + arr[j] > k:
+                j -= 1
+            else:
+                i += 1
+        
+        
+    def traverse(self,start,ans):
+        if start:
+            
+            self.traverse(start.left,ans)
+            ans.append(start.val)
+            self.traverse(start.right,ans)
+        return ans
+        
