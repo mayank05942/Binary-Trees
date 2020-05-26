@@ -34,7 +34,7 @@ ________________________________________________________________________________
 
 Depth of a Node:
 -----------------
-The depth of a node is the number of edges from the node to the tree's root node.
+The depth of a node is the number of edges from the root node to that node.
 
 We don't care about path any more when depth pops in. 
 We just count how many edges between the targeting node and the root, ignoring directions. 
