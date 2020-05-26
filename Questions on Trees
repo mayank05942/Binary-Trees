@@ -3,6 +3,6 @@
 
 Link: https://leetcode.com/problems/kth-smallest-element-in-a-bst/
 
-Idea: Preorder traversal of BST is equivalent to sort as all are in increasing order.
+Idea:  inorder traversal of BST is an array sorted in the ascending order.
 
 ______________________________________________________________________________________________________________________________________
