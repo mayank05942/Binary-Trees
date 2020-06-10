@@ -1,0 +1,33 @@
+Prob: https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
+____________________________________________________________________________________________________________________________________
+
+Explanation:
+_____________
+
+Sorted array in BST -> inorder traversal -> left,node,right hence root will be in the middle
+
+Split into two halfs and recurse
+
+_____________________________________________________________________________________________________________________________________
+Code:
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
+        
+        def check(start,end):
+            if start > end:
+                return None
+            
+            mid = start + (end-start)//2
+            node = TreeNode(nums[mid])
+            node.left = check(start,mid-1)
+            node.right = check(mid+1,end)
+
+            return node
+            
+        return check(0,len(nums)-1)
