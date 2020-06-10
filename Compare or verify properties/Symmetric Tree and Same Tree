@@ -1,0 +1,57 @@
+Same Tree: https://leetcode.com/problems/same-tree/
+______________________________________________________
+
+Explanation and Code:
+***********************
+
+Checking each node one by one if any node is different then return False else recurse
+
+Code:
+_____
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
+        
+        if p and q:
+            return (p.val == q.val) and self.isSameTree(p.left,q.left) and self.isSameTree(p.right,q.right)
+        
+        if not p and not q:  # these are the base conditions
+            return True
+        
+        if not p or not q:
+            return False
+            
+####################################################################################################################################
+
+Symmertic Tree: https://leetcode.com/problems/symmetric-tree/
+________________
+
+Code: Again similar approach as above
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isSymmetric(self, root: TreeNode) -> bool:
+        
+        def check(node1,node2):
+        
+             # base cases
+             
+            if node1 is None and node2 is None:
+                return True
+            if node1 is None or node2 is None:
+                return False
+            
+            return node1.val == node2.val and check(node1.right,node2.left) and check(node1.left,node2.right)
+        return check(root,root)
+        
