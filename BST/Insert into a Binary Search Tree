@@ -1,0 +1,31 @@
+Prob: https://leetcode.com/problems/insert-into-a-binary-search-tree/
+________________________________________________________________________________
+
+Explanation:
+
+start from the root node -> now there are three cases:
+1- root node/current node is None -> in that case create a new node with the data as " value to insert "
+2- if (value <= rootnode.val) then recur in the left hald of the subtree
+3 - if (value > rootnode.val) then recur in the right half of the subtree
+________________________________________________________________________________
+
+Code:
+
+class Solution:
+    def insertIntoBST(self, root: TreeNode, val: int) -> TreeNode:
+        
+        def insert(node,value):
+        
+            if not node:
+                return TreeNode(value)
+                
+            if value <= node.val:
+                node.left = insert(node.left,value)
+            
+            if value > node.val:
+                node.right = insert(node.right,value)
+            
+            return node
+        
+        return insert(root,val)
+         
