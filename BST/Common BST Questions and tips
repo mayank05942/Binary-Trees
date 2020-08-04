@@ -1,3 +1,6 @@
+Good Source to study: https://www.freecodecamp.org/news/binary-search-trees-bst-explained-with-examples/
+
+
 1- Validate BST: https://leetcode.com/problems/validate-binary-search-tree/
 
   Idea: Inorder traversal of BST is in sorted order use that property.
