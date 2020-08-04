@@ -1,0 +1,32 @@
+Prob: https://leetcode.com/problems/search-in-a-binary-search-tree/
+____________________________________________________________________________________________________________
+
+Explanation:
+
+Just like in binary search negelect one half at each comparison.
+
+____________________________________________________________________________________________________________
+
+Code:
+
+class Solution:
+    def searchBST(self, root: TreeNode, val: int) -> TreeNode:
+        
+        
+        def search(node,k):
+            if not node:
+                return None
+           
+            if node.val == k:
+                return node
+            
+            if k <= node.val:
+                return search(node.left,k)
+            
+            if k > node.val:
+                return search(node.right,k)
+            
+            return None
+        
+        return search(root,val)
+        
