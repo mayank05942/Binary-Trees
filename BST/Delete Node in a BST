@@ -1,0 +1,51 @@
+Prob: https://leetcode.com/problems/delete-node-in-a-bst/
+______________________________________________________________________________________________________
+
+Explanation:
+
+There are 3 cases here:
+1. If the target node has no child, we can simply remove the node.
+2. If the target node has one child, we can use its child to replace itself.
+3. If the target node has two children, replace the node with its in-order successor or predecessor node and delete that node.
+
+___________________________________________________________________________________________________
+
+Code:
+
+class Solution:
+    def deleteNode(self, root: TreeNode, key: int) -> TreeNode:
+        if root == None:
+            return root
+        # Find node
+        if key < root.val :
+            root.left = self.deleteNode(root.left,key)
+        elif key > root.val :
+            root.right = self.deleteNode(root.right,key)
+                
+        else: # Node to delete
+            # Case 1: No childs.
+            if root.left == None and root.right == None:
+                root = None
+                
+            # Case 2: One child
+            elif root.left == None and root.right != None :
+                root = root.right
+            elif root.right == None and root.left != None :
+                root = root.left
+                
+            # Case 3: 2 children
+            else:
+                minRoot = self.findMinNode(root.right)
+                root.val = minRoot.val
+                root.right = self.deleteNode(root.right,root.val)
+                
+        return root
+
+    def findMinNode(self, root: TreeNode) -> TreeNode:
+        current = root 
+  
+        # loop down to find the lefmost leaf 
+        while(current.left is not None): 
+            current = current.left 
+
+        return current 
