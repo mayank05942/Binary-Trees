@@ -1,0 +1,62 @@
+Prob: https://leetcode.com/problems/complete-binary-tree-inserter/
+________________________________________________________________________________________________________________________________________
+
+Explanation:
+
+Always use Level Order traversal for this.
+
+ Two cases when we are inserting:
+ 1- Tree is empty
+ 2 - Tree is filled find the 1st vacant child
+
+________________________________________________________________________________________________________________________________________
+
+Code:
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class CBTInserter:
+
+    def __init__(self, root: TreeNode):
+        self.root = root
+        
+
+    def insert(self, v: int) -> int:
+        if self.root is None:
+            self.root = TreeNode(v)
+        else:
+            queue = [self.root]
+            while queue:
+                front = queue.pop(0)
+               
+                if front.left:
+                    queue.append(front.left)
+                
+                if front.left is None:
+                    front.left = TreeNode(v)
+                    break
+                
+                if front.right:
+                    queue.append(front.right)
+                
+                if front.right is None:
+                    front.right = TreeNode(v)
+                    break
+            return front.val
+            
+                
+        
+
+    def get_root(self) -> TreeNode:
+        return self.root
+        
+
+
+# Your CBTInserter object will be instantiated and called as such:
+# obj = CBTInserter(root)
+# param_1 = obj.insert(v)
+# param_2 = obj.get_root()
