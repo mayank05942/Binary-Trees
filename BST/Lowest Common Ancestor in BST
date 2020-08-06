@@ -1,0 +1,69 @@
+Prob: https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
+________________________________________________________________________________________
+
+Explanation:
+
+Find all the ansectors of the two given nodes
+Find intersection of ansectors
+return the 1st one
+
+NOTE: Lowest common ansector does not means min ansector between them ,it means one that is closest to the given node
+
+_____________________________________________________________________________________________
+
+Code:
+
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        
+        """ traversal method will store the parent of the node """
+        
+        def traversal(node,ans,x):
+            if not node:
+                return ans
+            if x.val < node.val:
+                ans.append(node.val)
+                traversal(node.left,ans,x)
+            if x.val > node.val:
+                ans.append(node.val)
+                traversal(node.right,ans,x)
+            return ans
+            
+        lis1 = traversal(root,[],p)
+        lis2 = traversal(root,[],q)
+        
+        """ Node is ansector of itself too as stated in the question """
+        lis1.append(p.val)
+        lis2.append(q.val)
+        
+        lis1.reverse()
+        lis2.reverse()
+        
+        #print(lis1,lis2)
+        """ Intersection of two arrays """
+        
+        temp = []
+        for items in lis1:
+            if items in lis2:
+                temp.append(items)
+        #print(temp)
+        
+        x = temp[0]
+        
+        """ since answer needs to be in the form of a node"""
+        
+        def search(root,x):
+            if root.val == x:
+                return root
+            if x < root.val:
+                return search(root.left,x)
+            if x > root.val:
+                return search(root.right,x)
+            
+        
+        return search(root,x)
+ _________________________________________________________________________________________________________________               
+        
+        
+        
+              
