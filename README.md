@@ -18,3 +18,7 @@
 
 9 -Depth of a tree: Same as Depth of root node.
 
+10- Predecessor of a node is the immediate prev node in inorder traversal of the binary tree
+
+11- Successor of a node is the immediate next node in inorder traversal of the binary tree
+
