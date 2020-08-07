@@ -55,3 +55,34 @@ class Solution:
             return node1.val == node2.val and check(node1.right,node2.left) and check(node1.left,node2.right)
         return check(root,root)
         
+_____________________________________________________________________________________________________________________________________________
+
+# BFS sol:
+
+class Solution:
+    def isSymmetric(self, root: TreeNode) -> bool:
+        if not root:
+            return True
+            
+        # since root is symmertic by itself we need to check left and right
+        
+        queue = [(root.left,root.right)]
+        res =[]
+        while queue:
+            # pop 2 from queue
+            left,right = queue.pop(0)
+            
+            """ If both left or right is None then also tree is symmetic"""
+            
+            if left is None and right is None:
+                continue
+                
+            """ If left is None but right is not None or right is not None or left is None in both cases tree will not be symmertic """
+            
+            if (left is None or right is None) or (left.val != right.val):
+                return False
+            queue.append((left.left,right.right))
+            queue.append((left.right,right.left))
+
+        return True
+        
