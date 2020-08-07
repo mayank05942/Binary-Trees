@@ -53,6 +53,33 @@ class Solution:
         right_tree = self.maxDepth(root.right)
         
         return 1 + max(left_tree,right_tree)
+        
+        
+__________________________________________________________________________________________________________________________________________
+
+""" Using BFS """"
+
+class Solution:
+    def maxDepth(self, root: TreeNode) -> int:
+        if root is None:
+            return 0
+        queue = [root]
+        level = 0
+        while queue:
+        
+            for _ in range(len(queue)): # to deal with each level
+                
+                front= queue.pop(0)
+                
+                
+                if front.left:
+                    queue.append(front.left)
+                if front.right:
+                    queue.append(front.right)
+                    
+            level += 1  # after dealing with each level
+        return level
+                    
 
 
 
