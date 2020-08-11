@@ -1,0 +1,81 @@
+Prob: https://leetcode.com/problems/add-and-search-word-data-structure-design/submissions/
+___________________________________________________________________________
+
+Explanation:
+
+Everything is similiar to TRIE except this case ".ab"
+when prefix is "." then we have to look for all the childrens in the current node and check if a word
+can be constructed with them or not. We will use dfs for that.
+
+
+TrieNode class with two values: dictionary of children and flag, if this node is end of some word.
+
+Now, about search(self, word) function. Here we use dfs(node, i) with backtracking, because we can have symbol . 
+in our word (here node is link to Trie node and i is index of letter in word). So we need to check all options: we go to all possible children and call dfs recursively. 
+If we found not ., but just some letter, we check if we have this letter as children, and if we have, we go deeper.
+If we are out of letters, that is i == len(word), we return True if current end_node is equal to 1 and false in opposite case.
+Finally, we return False if we can not go deeper, but we still have letters.
+Now, we just return dfs(self.root, 0).
+
+Complexity: Easy part is space complexity, it is O(M), where M is sum of lengths of all words in our Trie. 
+This is upper bound: in practice it will be less than M and it depends, how much words are intersected. 
+The worst time complexity is also O(M), potentially we can visit all our Trie, if we have pattern like ...... For words without .,
+time complexity will be O(h), where h is height of Trie. For words with several letters and several ., we have something in the middle.
+___________________________________________________________________________
+
+Code:
+
+class TreeNode:
+    
+    def __init__(self,val):
+        self.val = val
+        self.children = {}
+        self.endhere = False
+
+
+
+
+class WordDictionary:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.root = TreeNode(None)
+        
+
+    def addWord(self, word: str) -> None:
+        """
+        Adds a word into the data structure.
+        """
+        curr = self.root
+        for char in word:
+            if char not in curr.children:
+                curr.children[char] = TreeNode(char)
+            curr = curr.children[char]
+        curr.endhere = True
+        
+
+    def search(self, word: str) -> bool:
+        
+        def dfs(node,idx):
+            if idx == len(word):
+                return node.endhere
+            
+            if word[idx] == ".":
+                for child in node.children:
+                    if dfs(node.children[child],idx+1) == True:
+                        return True
+            
+            if word[idx] in node.children:
+                return dfs(node.children[word[idx]],idx+1)
+            
+            return False
+        return dfs(self.root,0)
+        
+
+
+# Your WordDictionary object will be instantiated and called as such:
+# obj = WordDictionary()
+# obj.addWord(word)
+# param_2 = obj.search(word)
