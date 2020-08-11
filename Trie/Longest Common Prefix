@@ -1,0 +1,73 @@
+Prob: https://leetcode.com/problems/longest-common-prefix/
+___________________________________________________________________
+
+Explanation:
+
+Build a Trie and insert the words in it
+Then start searching taking any word in strs if branching occurs of len(dict) != 1
+then break and return the ans.
+
+___________________________________________________________________
+
+Code:
+
+class TreeNode:
+    def __init__(self,val):
+        self.val = val
+        self.children = {}
+        self.isend = False
+class Solution:
+    
+    def __init__(self):
+        self.root = TreeNode(None)
+    
+    
+        
+    def build(self,words):
+    
+        for items in words:
+            curr = self.root
+            for char in items:
+                if char not in curr.children:
+                    curr.children[char] = TreeNode(char)
+                curr = curr.children[char]
+            curr.isend = True
+            
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+    
+        """ Corner cases: if strs is empty then return ""  and if any of the items in strs is empty then also return ""   """
+        
+        if not strs:
+            return ""
+            
+        for items in strs:
+            if len(items) == 0:
+                return ""
+            
+        self.build(strs)
+        
+        curr = self.root
+        
+        x = strs[0]
+        
+        ans = ""
+        
+        for char in x:
+        
+        """ If there is any branching or dict contains more the one char then break the loop and return the ans """
+        
+        
+        
+        
+        
+            if len(curr.children) != 1:
+                return ans
+                
+            if char in curr.children and len(curr.children) == 1 or curr.isend == True:
+                ans += char
+            curr = curr.children[char]
+            if len(curr.children) > 1 or curr.isend == True:
+                break
+            
+        
+        return ans
