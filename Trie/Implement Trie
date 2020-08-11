@@ -1,0 +1,77 @@
+Prob: https://leetcode.com/problems/implement-trie-prefix-tree/
+____________________________________________________________________________
+
+Explanation:
+
+TreeNode will have 3 attributes: it's val which is a char
+it's children which will stored in a map type struct
+endhere flag which means a word ends here
+
+Idea is if a char is not in Trie append it into the dict like d[char] = TreeNode(char)
+then move the pointer in tree as curr = curr.d[char] -> now curr is a new Tree node.
+
+
+____________________________________________________________________________
+
+Code:
+
+class TreeNode:
+    
+    def __init__(self,val):
+        self.val = val
+        self.children ={}
+        self.endhere = False
+
+class Trie:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.root = TreeNode(None)
+        
+
+    def insert(self, word: str) -> None:
+        """
+        Inserts a word into the trie.
+        """
+        curr = self.root
+        
+        for char in word:
+            if char not in curr.children:
+                curr.children[char] = TreeNode(char)
+            curr = curr.children[char]
+        
+        curr.endhere = True
+
+    def search(self, word: str) -> bool:
+        """
+        Returns if the word is in the trie.
+        """
+        curr = self.root
+        for char in word:
+            if char not in curr.children:
+                return False
+            curr = curr.children[char]
+        
+        return curr.endhere
+        
+
+    def startsWith(self, prefix: str) -> bool:
+        """
+        Returns if there is any word in the trie that starts with the given prefix.
+        """
+        curr = self.root
+        for char in prefix:
+            if char not in curr.children:
+                return False
+            curr = curr.children[char]
+        return True
+        
+
+
+# Your Trie object will be instantiated and called as such:
+# obj = Trie()
+# obj.insert(word)
+# param_2 = obj.search(word)
+# param_3 = obj.startsWith(prefix)
