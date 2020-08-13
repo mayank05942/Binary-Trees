@@ -1,0 +1,53 @@
+Prob: https://leetcode.com/problems/diameter-of-binary-tree/
+______________________________________________________________________________
+https://www.youtube.com/watch?v=rrb__sKNgQQ
+https://www.youtube.com/watch?v=GJg2EYolN-E
+
+
+
+Explanation: if root is included in max diameter then: height(left) + height(right)
+else: we have to calculate diameter of left and right
+
+Hence we have 3 options:
+1 - height(left) + height(right)
+2 - diameter(left)
+3 - diameter(right)
+
+max among them is ans.
+
+________________________________________________________________________________
+
+Code:
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def diameterOfBinaryTree(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        
+        def height(root):
+            if root is None:
+                return 0
+            left = height(root.left)
+            right = height(root.right)
+            return 1 + max(left,right)
+        
+        def solve(root):
+            if root is None:
+                return 0
+            # finding height of left and right subtree if passing through the root
+            left_height = height(root.left)
+            right_height = height(root.right)
+            
+            # if longest path doesn't passed the root
+            left_diameter = solve(root.left)
+            right_diameter = solve(root.right)
+            
+            return max(1+left_height+right_height,max(left_diameter,right_diameter))
+        
+        return solve(root)-1
